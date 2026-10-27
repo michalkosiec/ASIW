@@ -1,6 +1,71 @@
-@Cars.API_HostAddress = http://localhost:5186
+@host = http://localhost:5186
+@carId = 501516fa-6bb0-42b7-9111-0931c16a35a0
 
-GET {{Cars.API_HostAddress}}/weatherforecast/
+### GET All Cars
+GET {{host}}/api/cars
+Accept: application/json 
+
+###
+
+### GET Car By Id
+GET {{host}}/api/cars/{{carId}}
 Accept: application/json
 
 ###
+
+### POST Create Car
+POST {{host}}/api/cars
+Content-Type: application/json
+
+{
+  "brand": "Toyota",
+  "model": "Corolla",
+  "doorsNumber": 5,
+  "luggageCapacity": 470,
+  "engineCapacity": 1800,
+  "fuelType": 1,
+  "productionDate": "2022-05-10T00:00:00Z",
+  "averageFuelConsumption": 6.4,
+  "bodyType": 1
+}
+
+###
+
+### PUT Update Car
+PUT {{host}}/api/cars/{{carId}}
+Content-Type: application/json
+
+{
+  "brand": "Toyota",
+  "model": "Coroooolllaaa",
+  "doorsNumber": 5,
+  "luggageCapacity": 470,
+  "engineCapacity": 1800,
+  "fuelType": 1,
+  "productionDate": "2023-04-15T00:00:00Z",
+  "averageFuelConsumption": 4.8,
+  "bodyType": 1
+}
+
+###
+
+### DELETE Car
+DELETE {{host}}/api/cars/{{carId}}
+
+###
+
+### POST Create Car - Validation Error
+POST {{host}}/api/cars
+Content-Type: application/json
+
+{
+  "brand": "",
+  "model": "",
+  "doorsNumber": 1,
+  "luggageCapacity": -10,
+  "engineCapacity": 0,
+  "fuelType": 1,
+  "productionDate": "2035-01-01T00:00:00Z",
+  "averageFuelConsumption": -4.5,
+  "bodyType": 1
+}

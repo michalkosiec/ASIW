@@ -1,4 +1,9 @@
+using Cars.API.Middleware;
+using Cars.Application.Cars;
+using Cars.Application.Common.Behaviors;
 using Cars.Infrastructure;
+using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +14,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(GetCarList.Handler).Assembly);
+});
+builder.Services.AddValidatorsFromAssemblyContaining<Create.CommandValidator>();
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
@@ -20,6 +31,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<ApiExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
