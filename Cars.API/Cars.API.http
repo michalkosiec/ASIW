@@ -1,5 +1,5 @@
 @host = http://localhost:5186
-@carId = 501516fa-6bb0-42b7-9111-0931c16a35a0
+@carId = 4dae8d6a-fff4-4c9a-a3cf-4eafa35b963f
 
 ### GET All Cars
 GET {{host}}/api/cars
