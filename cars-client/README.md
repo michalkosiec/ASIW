@@ -1,32 +1,34 @@
-# React + TypeScript + Vite
+# Cars Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Frontend aplikacji samochodów przygotowany w React + TypeScript + Vite. Klient korzysta z rzeczywistego backendu `Cars.API`, biblioteki Axios oraz globalnego magazynu Zustand.
 
-Currently, two official plugins are available:
+## Uruchomienie
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Uruchom backend z katalogu głównego rozwiązania: `dotnet run --project Cars.API`.
+2. W `cars-client` skopiuj `.env.example` do `.env` i w razie potrzeby ustaw `VITE_API_URL`.
+3. Zainstaluj zależności i uruchom klienta:
 
-## React Compiler
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Domyślny adres API to `http://localhost:5186/api`.
 
-## Expanding the Oxlint configuration
+## Zrealizowany zakres nowego zadania
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- Axios obsługuje operacje GET, POST, PUT i DELETE przez `src/services/carService.ts`.
+- Adres backendu jest konfigurowany przez `VITE_API_URL`.
+- Zustand z `persist` przechowuje wyszukiwanie, filtr ulubionych i identyfikatory ulubionych w `localStorage`.
+- Lista i szczegóły samochodu pozwalają oznaczać auta jako ulubione; nawigacja pokazuje ich liczbę.
+- Wyszukiwanie po marce/modelu i filtrowanie ulubionych działają po stronie klienta.
+- Usunięcie samochodu usuwa również jego identyfikator z magazynu ulubionych.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Materiały
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+W katalogu głównym dodano materiały PDF do laboratoriów 3 i 4 wraz z zadaniami:
+
+- `_Aplikacje_webowe_26_27__4__React___podstawy.pdf`
+- `_Aplikacje_webowe_26_27__4__React___podstawy_zadanie.pdf`
+- `_Aplikacje_webowe_26_27__5__React___axios__zustand.pdf`
+- `_Aplikacje_webowe_26_27__5__React___axios__zustand_zadanie.pdf`
